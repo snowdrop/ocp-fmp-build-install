@@ -25,10 +25,13 @@ mvn clean package
 mvn fabric8:resource
 ```
 
-**Remark** : deploymentConfig, Service and Route are created under `target/classes/META-INF/fabric8/openshift` for the 
-individual files like an OpenShift list `target/classes/META-INF/fabric8/openshift.yml` 
+**Remark** : 
 
-**WARNING** : No `BuildConfig` exists as it is created on-the-fly during `fabric8:build` phase
+- During the execution of this maven goal, the DeploymentConfig, Service and Route resources (yaml, json)
+are created under the following directory `target/classes/META-INF/fabric8/openshift` for the 
+individual files. An OpenShift list is generated at the root this folder `target/classes/META-INF/fabric8/`. The toll will also generate k8s resource files 
+
+- No `BuildConfig` exists as it is created on-the-fly during `fabric8:build` goal execution
 
 - Apply the resources
 
@@ -36,7 +39,7 @@ individual files like an OpenShift list `target/classes/META-INF/fabric8/openshi
 mvn fabric8:resource-apply
 ```
 
-**Remark** : deploymentConfig, Service and Route are deployed on OpenShift
+**Remark** : The DeploymentConfig, Service and Route resources are created on OpenShift within the namespace
 
 - Build the OpenShift application
 
@@ -45,17 +48,12 @@ mvn fabric8:build
 ```
 **Steps**
 
-- BuildConfig, ImageStream resources will be first created
-- A build will be then started which is a S2I build and the content of the `target` directory uploaded (TO BE UPDATED)
+- During this maven goal, the fabric8 tool will generate first a BuildConfig and ImageStream resources
+- Next, a S2I build will be then started using a SourceStragegy and where the content is pushed a binary stream to the platform
+- So, the `target` directory is uploaded
+- during the execution of this maven goal, a Docker tar is created containing a generated Dockerfile and the uber jar file.
+- They both will be used to generate the application imagestream
 
-```bash
-ls -la target/docker/ocp-fmp-build-install/1.0/build
-total 8
-drwxr-xr-x  4 dabou  staff  128 Jun  1 07:04 .
-drwxr-xr-x  5 dabou  staff  160 Jun  1 07:04 ..
--rw-r--r--  1 dabou  staff  106 Jun  1 07:23 Dockerfile
-drwxr-xr-x  3 dabou  staff   96 Jun  1 07:04 maven
-```
 - UnDeploy the application
 
 ```bash
