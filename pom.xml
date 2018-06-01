@@ -23,13 +23,18 @@
     <version>1.5.13-2</version>
   </parent>
 
-  <artifactId>spring-boot-rest-http</artifactId>
-  <version>1.5.13-1</version>
+  <groupId>io.cloudnative</groupId>
+  <artifactId>ocp-fmp-build-install</artifactId>
+  <version>1.0</version>
 
   <name>Spring Boot - HTTP Booster</name>
   <description>Spring Boot - HTTP Booster</description>
 
-  
+  <properties>
+    <fabric8.generator.from>
+      fabric8/s2i-java:latest
+    </fabric8.generator.from>
+  </properties>
 
   <dependencies>
     <!-- Spring Boot Starters -->
@@ -50,40 +55,6 @@
       <artifactId>jackson-jaxrs-json-provider</artifactId>
     </dependency>
 
-    <!-- Testing -->
-    <dependency>
-      <groupId>org.jboss.arquillian.junit</groupId>
-      <artifactId>arquillian-junit-standalone</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.arquillian.cube</groupId>
-      <artifactId>arquillian-cube-openshift</artifactId>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>io.undertow</groupId>
-          <artifactId>undertow-core</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <scope>test</scope>
-    </dependency>
-
     <!-- Spring Boot Developer Tools -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -91,23 +62,4 @@
         <optional>true</optional>
     </dependency>
   </dependencies>
-
-  <profiles>
-    <profile>
-      <id>openshift-it</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <configuration>
-              <systemPropertyVariables>
-                <app.name>${project.artifactId}</app.name>
-              </systemPropertyVariables>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
