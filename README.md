@@ -1,37 +1,37 @@
 # Instructions
 
 - Git clone project
-
-```bash
-git clone https://github.com/snowdrop/ocp-fmp-build-install.git && cd ocp-fmp-build-install
-```
+  
+  ```bash
+  git clone https://github.com/snowdrop/ocp-fmp-build-install.git && cd ocp-fmp-build-install
+  ```
 
 - Log on to OpenShift and create project
 
-```bash
-oc login $(minishift ip):8443 -u admin -p admin
-oc new-project ocp-fmp-build-install
-```
+  ```bash
+  oc login $(minishift ip):8443 -u admin -p admin
+  oc new-project ocp-fmp-build-install
+  ```
 
 - Build locally
 
-```bash
-mvn clean package
-```
+  ```bash
+  mvn clean package
+  ```
 
 - Create the OpenShift resources locally
 
-```bash
-mvn fabric8:resource
-```
+  ```bash
+  mvn fabric8:resource
+  ```
 
-**Remarks** : 
-- During the execution of this maven goal, the DeploymentConfig, Service and Route resources (yaml, json)
+  **Remarks** : 
+  - During the execution of this maven goal, the DeploymentConfig, Service and Route resources (yaml, json)
 are created under the following directory `target/classes/META-INF/fabric8/openshift` for the 
 individual files.
 An OpenShift list is generated at the root of this folder `target/classes/META-INF/fabric8/`.
 The tool will also generate k8s resource files 
-- No `BuildConfig` exists as it is created on-the-fly during `fabric8:build` goal execution
+  - No `BuildConfig` exists as it is created on-the-fly during `fabric8:build` goal execution
 
 - Apply the resources
 
