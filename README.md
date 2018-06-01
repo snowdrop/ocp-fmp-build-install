@@ -35,27 +35,27 @@ The tool will also generate k8s resource files
 
 - Apply the resources
 
-```bash
-mvn fabric8:resource-apply
-```
+  ```bash
+  mvn fabric8:resource-apply
+  ```
 
-**Remark** : The DeploymentConfig, Service and Route resources are created on OpenShift within the namespace
+  **Remark** : The DeploymentConfig, Service and Route resources are created on OpenShift within the namespace
 
 - Build the OpenShift application
 
-```bash
-mvn fabric8:build
-```
-**Steps**
-
-- During this maven goal, the fabric8 tool will generate first a BuildConfig and ImageStream resources
-- Next, a S2I build will be then started using a SourceStragegy and where the content is pushed a binary stream to the platform
-- So, the `target` directory is uploaded
-- during the execution of this maven goal, a Docker tar is created containing a generated Dockerfile and the uber jar file.
-- They both will be used to generate the application imagestream
+  ```bash
+  mvn fabric8:build
+  ```
+  **Steps**
+  
+  - During this maven goal, the fabric8 tool will generate first a BuildConfig and ImageStream resources
+  - Next, a S2I build will be then started using a SourceStragegy and where the content is pushed a binary stream to the platform
+  - So, the `target` directory is uploaded
+  - during the execution of this maven goal, a Docker tar is created containing a generated Dockerfile and the uber jar file.
+  - They both will be used to generate the application imagestream
 
 - UnDeploy the application
 
-```bash
-oc delete svc,is,bc,dc,route -l app=ocp-fmp-build-install 
-```
+  ```bash
+  oc delete svc,is,bc,dc,route -l app=ocp-fmp-build-install 
+  ```
