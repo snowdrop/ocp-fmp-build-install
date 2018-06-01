@@ -25,15 +25,13 @@ mvn clean package
 mvn fabric8:resource
 ```
 
-**Remark** : 
-
- - During the execution of this maven goal, the DeploymentConfig, Service and Route resources (yaml, json)
+**Remarks** : 
+- During the execution of this maven goal, the DeploymentConfig, Service and Route resources (yaml, json)
 are created under the following directory `target/classes/META-INF/fabric8/openshift` for the 
 individual files.
 An OpenShift list is generated at the root of this folder `target/classes/META-INF/fabric8/`.
 The tool will also generate k8s resource files 
-
- - No `BuildConfig` exists as it is created on-the-fly during `fabric8:build` goal execution
+- No `BuildConfig` exists as it is created on-the-fly during `fabric8:build` goal execution
 
 - Apply the resources
 
